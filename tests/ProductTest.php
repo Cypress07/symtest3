@@ -19,6 +19,7 @@ class ProductTest extends TestCase
         return $product;
     }
 
+    /*
     public function testVatForFoodProduct() {
 
         //Arrange
@@ -32,4 +33,62 @@ class ProductTest extends TestCase
         $this->assertEquals(10.55, $ttc);
     }
    
+    public function testVatForStandardProduct(){
+
+        //Arrange
+        $car = $this->getProduct();
+        $car->setPrice(100000);
+
+        //Act
+        $ttc = $car->getPriceIncludingVAT();
+
+        //Assert
+        $this->assertEquals(120000, $ttc);
+    }
+   */ 
+    public function setUp() {
+        parent::setUp();
+        //todo
+    }
+
+    public function tearDown(){
+        parent::tearDown();
+        //todo
+    }
+
+   /**
+    * @dataProvider getPricesForProducts
+    */
+    public function testVatForProducts (Product $product, $expectedPriceIncludingVAT)
+    {
+        $this->assertEquals ($expectedPriceIncludingVAT, $product->getPriceIncludingVAT());
+    }
+
+    public function getPricesForProducts()
+    {
+        return [
+            [
+                $this->getProduct(20)->setname('Porsche Carrera')->setPrice(100000), 120000
+            ],
+            [
+                $this->getProduct(10)->setName('Doliprane')->setPrice(3), 3.3
+            ],
+            [
+                $this->getProduct(5.5)->setName('Gatsby, Le Magnifique')->setPrice(10), 10.55
+            ],
+            
+            [
+                $this->getProduct(2.1)->setName('Télé7Jours')->setPrice(1), 1.021
+            ],
+        ];
+    }
+
+    /**
+     * @expectedException App\Exception\BadVatRateException
+     */
+    public function testBadVatRateException ()
+    {
+        $category = new Category();
+        $category->setVatRate (50);
+    }
 }

@@ -75,7 +75,8 @@ class Category
         if ($vatRate >=1) $vatRate = $vatRate /100;
 
         if (!in_array ($vatRate, self::VALID_VAT_RATES)){
-            throw new BadVatRateException(
+           
+           throw new BadVatRateException(
             $vatRate." is not a valid VAT rate (use one of the foolwing : )"
             .implode (',', self ::VALID_VAT_RATES)
             );

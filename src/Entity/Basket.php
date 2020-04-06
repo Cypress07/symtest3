@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Customer;
 use App\Entity\BasketLine;
 
 /**
@@ -83,4 +82,23 @@ class Basket
 
         return $this;
     }
+
+    public function getTotalHT (){
+        //Refactoriser code avec la fontion array_reduce()
+        /*
+        $total = 0;
+        foreach ($this->basketLines as $basketLine) {
+            $total += $basketLine->getQuantity * $basketLine->getProduct()->getPrice();
+        }
+        return $total;
+        */
+      /** @var BasketLine $basketline*/
+        return array_reduce($this->basketLines->toArray(), function ($sum, $basketLine){
+            return $sum + $basketLine->getQuantity() * $basketLine->getProduct()->getPrice();
+      }, 0);
+        
+        
+    }
 }
+
+
