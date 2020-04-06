@@ -96,8 +96,6 @@ class Basket
         return array_reduce($this->basketLines->toArray(), function ($sum, $basketLine){
             return $sum + $basketLine->getQuantity() * $basketLine->getProduct()->getPrice();
       }, 0);
-        
-        
     }
 }
 
