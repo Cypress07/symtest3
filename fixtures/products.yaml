@@ -1,0 +1,33 @@
+App\Entity\Category:
+    category_food:
+        name: Nourriture
+        vatRate: 5.5
+    category_games:
+        name: Jeux
+        vatRate: 20
+    category_beverages:
+        name: Boissons sans alcool
+        vatRate: 10
+    category_medicine:
+        name: Médicaments remboursables
+        vatRate: 2.1
+
+App\Entity\Product:
+    product{1..15}:
+        name: '<word()>'
+        description: '<word()>'
+        #imageUrl: http://placehold.it/700x400
+        imageUrl: '<imageUrl()>'
+        price: '<randomNumber(2)>'
+        category: '@category_*'
+
+App\Entity\Customer:
+    customer{1..30}:
+        id: '<current()>'
+        firstname: '<firstname()>'
+        lastname: '<lastname()>'
+        username (unique): '<username()>'
+        email: '<email()>'
+        street: '<streetAddress()>'
+        city: '<city()>'
+        zipCode: '<postCode()>'
