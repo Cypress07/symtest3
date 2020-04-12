@@ -17,7 +17,7 @@ class CategoryFixtures extends Fixture
         $gamesCategory = new Category();
         $gamesCategory->setName('Jeux')->setVatRate(Category::STANDARD_VAT_RATE);
         $manager->persist($gamesCategory);
-
+        
         $manager->flush();
         
 
